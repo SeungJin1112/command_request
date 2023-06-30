@@ -6,16 +6,17 @@
 
 #include <libssh/libssh.h>
 
-#include "abstract_classes.h"
+#include "../include/abstract_classes.h" 
 
-// Use Pattern
-// * Adapter Pattern 
-
-class AdvancedSSHRequest
+class SSHLogin : public AdvancedLogin
 {
 public:
-    virtual void SET() = 0;
-    
+	void SSHConnection(std::map<std::string, std::string>& mpLogin) override;
+	void SSHDisConnection(std::map<std::string, std::string>& mpLogin) override {};
+	void GetLocalAccount() override {};
+
+private:
+	ssh_session m_sshSession;
 };
 
 #endif // SSH_REQUEST_H
