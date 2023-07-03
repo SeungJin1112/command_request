@@ -1,12 +1,10 @@
-//Header Guard
-#pragma once
-
 #ifndef SSH_REQUEST_H
 #define SSH_REQUEST_H
 
-#include <libssh/libssh.h>
+#include <iostream>
+#include <map>
 
-#include "../include/abstract_classes.h" 
+#include <libssh/libssh.h>
 
 class SSHLogin : public AdvancedLogin
 {

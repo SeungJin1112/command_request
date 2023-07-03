@@ -1,3 +1,4 @@
+#include "../include/abstract_classes.h"
 #include "../include/ssh_request.h"
 
 enum SSH_FREE_LEVEL
@@ -20,33 +21,27 @@ void SSHLogin::SSHConnection(std::map<std::string, std::string>& mpLogin)
 	ssh_options_set(m_sshSession, SSH_OPTIONS_USER, mpLogin["USER"].c_str());
 
 	if (!mpLogin["PRIVATE_KEY_PATH"].empty())
-	{
-		if (ssh_options_set(m_sshSession, SSH_OPTIONS_IDENTITY, mpLogin["PRIVATE_KEY_PATH"].c_str()) < 0)
-		{
-			ssh_free(m_sshSession);
-			return;
-		}
-	}
+		ssh_options_set(m_sshSession, SSH_OPTIONS_IDENTITY, mpLogin["PRIVATE_KEY_PATH"].c_str());
 
 	if (ssh_connect(m_sshSession) == SSH_OK)
 	{
 		if (!mpLogin["PRIVATE_KEY_PATH"].empty())
 		{
+			if (ssh_userauth_publickey_auto(m_sshSession, NULL, NULL) == SSH_AUTH_SUCCESS)
+				return;
 		}
 		else if (!mpLogin["PASSWORD"].empty())
 		{
+			if (ssh_userauth_password(m_sshSession, NULL, mpLogin["PASSWORD"].c_str())
+				== SSH_AUTH_SUCCESS)
+				return;
+		}
 
-		}
-		else
-		{
-			ssh_disconnect(m_sshSession);
-			ssh_free(m_sshSession);
-		}
-		return;
-	}
-	else
-	{
+		ssh_disconnect(m_sshSession);
 		ssh_free(m_sshSession);
 		return;
 	}
+
+	ssh_free(m_sshSession);
+	return;
 }

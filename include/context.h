@@ -1,15 +1,8 @@
-//Header Guard
-#pragma once
-
 #ifndef CONTEXT_H
 #define CONTEXT_H
 
-#include <iostream>
-
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#endif
+#include "../include/abstract_classes.h"
+#include "../include/ssh_request.h"
 
 // Use Pattern
 // * Facade Pattern 

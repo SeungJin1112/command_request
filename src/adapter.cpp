@@ -5,12 +5,12 @@ AdapterLogin::AdapterLogin(int mode)
 {
     switch (mode)
     {
-    SSH_MODE:
+    case SSH_MODE:
         m_advancedLogin = new SSHLogin();
         break;
-    CMD_WIN_MODE:
+    case CMD_WIN_MODE:
         break;
-    CMD_UNIX_MODE:
+    case CMD_UNIX_MODE:
         break;
     default:
         break;
@@ -21,11 +21,11 @@ void AdapterLogin::Login(int mode, std::map<std::string, std::string>& mpLogin)
 {
     switch (mode)
     {
-    SSH_MODE:
+    case SSH_MODE:
         m_advancedLogin->SSHConnection(mpLogin);
         break;
-    CMD_WIN_MODE:
-    CMD_UNIX_MODE:
+    case CMD_WIN_MODE:
+    case CMD_UNIX_MODE:
         m_advancedLogin->GetLocalAccount();
         break;
     default:
@@ -34,11 +34,11 @@ void AdapterLogin::Login(int mode, std::map<std::string, std::string>& mpLogin)
 }
 
 void TargetLoginImpl::Login(int mode, 
-    std::string host = "",
-    std::string port = "",
-    std::string user = "",
-    std::string pw = "",
-    std::string keyPath = "")
+    std::string host,
+    std::string port,
+    std::string user,
+    std::string pw,
+    std::string keyPath)
 {
     if (mode == 0)
         return;

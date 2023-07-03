@@ -1,18 +1,10 @@
-//Header Guard
-#pragma once
-
 #ifndef ABSTRACT_CLASSES_H
 #define ABSTRACT_CLASSES_H
 
 #include <iostream>
 #include <map>
 
-#ifdef _WIN32
-#include <Windows.h>
-#else
-#endif
-
-enum mode
+enum MODE
 {
     SSH_MODE = 0x01,
     CMD_WIN_MODE,
@@ -47,12 +39,12 @@ private:
 class TargetLoginImpl 
 {
 public:
-    void Login(int mode, 
-        std::string host, 
-        std::string port, 
-        std::string user, 
-        std::string pw, 
-        std::string keyPath);
+    void Login(int mode,
+        std::string host = "",
+        std::string port = "",
+        std::string user = "",
+        std::string pw = "",
+        std::string keyPath = "");
 
 private:
     AdapterLogin* m_adapterLogin;
