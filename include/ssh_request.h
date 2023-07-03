@@ -1,9 +1,6 @@
 #ifndef SSH_REQUEST_H
 #define SSH_REQUEST_H
 
-#include <iostream>
-#include <map>
-
 #include <libssh/libssh.h>
 
 class SSHLogin : public AdvancedLogin

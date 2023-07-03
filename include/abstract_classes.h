@@ -1,12 +1,10 @@
 #ifndef ABSTRACT_CLASSES_H
 #define ABSTRACT_CLASSES_H
 
-#include <iostream>
-#include <map>
-
-enum MODE
+enum LOGIN_MODE
 {
-    SSH_MODE = 0x01,
+    NO_MODE,
+    SSH_MODE,
     CMD_WIN_MODE,
     CMD_UNIX_MODE,
 };
@@ -41,7 +39,6 @@ class TargetLoginImpl
 public:
     void Login(int mode,
         std::string host = "",
-        std::string port = "",
         std::string user = "",
         std::string pw = "",
         std::string keyPath = "");

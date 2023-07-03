@@ -1,3 +1,4 @@
+#include "../include/stdafx.h" 
 #include "../include/abstract_classes.h"
 #include "../include/ssh_request.h"
 
@@ -35,7 +36,6 @@ void AdapterLogin::Login(int mode, std::map<std::string, std::string>& mpLogin)
 
 void TargetLoginImpl::Login(int mode, 
     std::string host,
-    std::string port,
     std::string user,
     std::string pw,
     std::string keyPath)
@@ -47,8 +47,6 @@ void TargetLoginImpl::Login(int mode,
 
     if (!host.empty())
         m_mpLogin.insert(std::make_pair("HOST", host));
-    if (!port.empty())
-        m_mpLogin.insert(std::make_pair("PORT", port));
     if (!user.empty())
         m_mpLogin.insert(std::make_pair("USER", user));
     if (!pw.empty())

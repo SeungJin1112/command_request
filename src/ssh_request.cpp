@@ -1,3 +1,4 @@
+#include "../include/stdafx.h" 
 #include "../include/abstract_classes.h"
 #include "../include/ssh_request.h"
 
