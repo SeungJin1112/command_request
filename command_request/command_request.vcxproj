@@ -151,6 +151,7 @@
     <ClInclude Include="..\include\abstract_classes.h" />
     <ClInclude Include="..\include\context.h" />
     <ClInclude Include="..\include\ssh_request.h" />
+    <ClInclude Include="..\include\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

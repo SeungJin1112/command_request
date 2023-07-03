@@ -57,3 +57,19 @@ void TargetLoginImpl::Login(int mode,
     m_adapterLogin = new AdapterLogin(m_mode);
     m_adapterLogin->Login(m_mode, m_mpLogin);
 }
+
+void TargetLoginImpl::Login(int mode, std::map<std::string, std::string>& mpLogin)
+{
+    if (mode == 0 && mpLogin.empty())
+    {
+        return;
+    }
+    else
+    {
+        m_mode = mode;
+        m_mpLogin = mpLogin;
+    }
+
+    m_adapterLogin = new AdapterLogin(m_mode);
+    m_adapterLogin->Login(m_mode, m_mpLogin);
+}

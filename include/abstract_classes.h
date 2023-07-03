@@ -43,6 +43,8 @@ public:
         std::string pw = "",
         std::string keyPath = "");
 
+    void Login(int mode, std::map<std::string, std::string>& mpLogin);
+
 private:
     AdapterLogin* m_adapterLogin;
 

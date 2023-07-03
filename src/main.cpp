@@ -12,41 +12,37 @@ int main(int argc, char** argv)
 
 	for (int i = 0; i < vtArgs.size(); i++)
 	{
-		if (vtArgs[i].compare("-h") == 0 && (i + 1) < argc) 
-			mpArgs.insert(std::make_pair("HOST", vtArgs[i + 1]));
-		if (vtArgs[i].compare("-u") == 0 && (i + 1) < argc) 
-			mpArgs.insert(std::make_pair("USER", vtArgs[i + 1]));
-		if (vtArgs[i].compare("-pw") == 0 && (i + 1) < argc) 
-			mpArgs.insert(std::make_pair("PASSWORD", vtArgs[i + 1]));
-		if (vtArgs[i].compare("-key") == 0 && (i + 1) < argc)
-			mpArgs.insert(std::make_pair("PRIVATE_KEY_PATH", vtArgs[i + 1]));
 		if (vtArgs[i].compare("-mode") == 0 && (i + 1) < argc)
 			mpArgs.insert(std::make_pair("LOGIN_MODE", vtArgs[i + 1]));
+		else if (vtArgs[i].compare("-h") == 0 && (i + 1) < argc) 
+			mpArgs.insert(std::make_pair("HOST", vtArgs[i + 1]));
+		else if (vtArgs[i].compare("-u") == 0 && (i + 1) < argc)
+			mpArgs.insert(std::make_pair("USER", vtArgs[i + 1]));
+		else if (vtArgs[i].compare("-pw") == 0 && (i + 1) < argc)
+			mpArgs.insert(std::make_pair("PASSWORD", vtArgs[i + 1]));
+		else if (vtArgs[i].compare("-key") == 0 && (i + 1) < argc)
+			mpArgs.insert(std::make_pair("PRIVATE_KEY_PATH", vtArgs[i + 1]));
 	}
 
-	if (mpArgs["LOGIN_MODE"].empty())
-	{
-		return;
-	}
-	else
+	if (!mpArgs["LOGIN_MODE"].empty())
 	{
 		if (mpArgs["LOGIN_MODE"].compare("SSH_MODE") == 0)
 			mode = SSH_MODE;
-		if (mpArgs["LOGIN_MODE"].compare("CMD_WIN_MODE") == 0)
+		else if (mpArgs["LOGIN_MODE"].compare("CMD_WIN_MODE") == 0)
 			mode = CMD_WIN_MODE;
-		if (mpArgs["LOGIN_MODE"].compare("CMD_UNIX_MODE") == 0)
+		else if (mpArgs["LOGIN_MODE"].compare("CMD_UNIX_MODE") == 0)
 			mode = CMD_UNIX_MODE;
-	}
 
-	TargetLoginImpl *loginImpl = new TargetLoginImpl();
+		TargetLoginImpl* loginImpl = new TargetLoginImpl();
 
-	if (mode == SSH_MODE)
-	{
-		//Login
-	}
-	else
-	{
-		loginImpl->Login(mode);
+		switch (mode)
+		{
+		case SSH_MODE:
+			loginImpl->Login(mode, mpArgs);
+			break;
+		default:
+			break;
+		}
 	}
 
 	return 0;
